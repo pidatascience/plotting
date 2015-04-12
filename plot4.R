@@ -51,6 +51,7 @@ with(epcframe, lines(y = Global_reactive_power, x = Time))
 
 # Write to file as required
 png(filename = FILENAME)
+par(mfrow=c(2, 2))
 ## top left
 with(epcframe,plot(y = Global_active_power, x = Time, 
                    type = "n",
