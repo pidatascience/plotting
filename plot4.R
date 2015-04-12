@@ -81,6 +81,7 @@ with(epcframe,plot(y = Global_reactive_power, x = Time,
                    xlab = "datetime",
                    ylab = "Global_reactive_power"))
 with(epcframe, lines(y = Global_reactive_power, x = Time))
+dev.off()
 
 # Clean up
 sapply(c(TEMPFILE, epcfile), function(epcfilename) { file.remove(epcfilename) })
