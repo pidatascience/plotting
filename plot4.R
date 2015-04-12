@@ -1,7 +1,7 @@
 UCIEPC <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 
 # Wrangle data
-FILENAME <- "plot3.png"
+FILENAME <- "plot4.png"
 TEMPFILE <- tempfile()
 download.file(url = UCIEPC, destfile = TEMPFILE)
 unzip(TEMPFILE, overwrite = T)
@@ -15,9 +15,22 @@ epcframe <- transform(epcframe, Sub_metering_1 = as.numeric(Sub_metering_1))
 epcframe <- transform(epcframe, Sub_metering_2 = as.numeric(Sub_metering_2))
 epcframe <- transform(epcframe, Sub_metering_3 = as.numeric(Sub_metering_3))
 
-par(mfrow=c(1, 1))
+par(mfrow=c(2, 2))
 
 # Show on screen for convenience
+## top left
+with(epcframe,plot(y = Global_active_power, x = Time, 
+                   type = "n",
+                   xlab = "",
+                   ylab = "Global Active Power"))
+with(epcframe, lines(y = Global_active_power, x = Time))
+## top right
+with(epcframe,plot(y = Voltage, x = Time, 
+                   type = "n",
+                   xlab = "datetime",
+                   ylab = "Voltage"))
+with(epcframe, lines(y = Voltage, x = Time))
+## bottom left
 with(epcframe,plot(y = Sub_metering_1, x = Time, 
                    type = "n",
                    xlab = "",
@@ -29,9 +42,28 @@ legend("topright",
        col = c("black", "red", "blue"), 
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
        lty= c(1, 1, 1))
+## bottom right
+with(epcframe,plot(y = Global_reactive_power, x = Time, 
+                   type = "n",
+                   xlab = "datetime",
+                   ylab = "Global_reactive_power"))
+with(epcframe, lines(y = Global_reactive_power, x = Time))
 
 # Write to file as required
 png(filename = FILENAME)
+## top left
+with(epcframe,plot(y = Global_active_power, x = Time, 
+                   type = "n",
+                   xlab = "",
+                   ylab = "Global Active Power"))
+with(epcframe, lines(y = Global_active_power, x = Time))
+## top right
+with(epcframe,plot(y = Voltage, x = Time, 
+                   type = "n",
+                   xlab = "datetime",
+                   ylab = "Voltage"))
+with(epcframe, lines(y = Voltage, x = Time))
+## bottom left
 with(epcframe,plot(y = Sub_metering_1, x = Time, 
                    type = "n",
                    xlab = "",
@@ -43,7 +75,12 @@ legend("topright",
        col = c("black", "red", "blue"), 
        legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), 
        lty= c(1, 1, 1))
-dev.off()
+## bottom right
+with(epcframe,plot(y = Global_reactive_power, x = Time, 
+                   type = "n",
+                   xlab = "datetime",
+                   ylab = "Global_reactive_power"))
+with(epcframe, lines(y = Global_reactive_power, x = Time))
 
 # Clean up
 sapply(c(TEMPFILE, epcfile), function(epcfilename) { file.remove(epcfilename) })

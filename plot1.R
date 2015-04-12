@@ -15,6 +15,8 @@ epcframe <- transform(epcframe, Sub_metering_1 = as.numeric(Sub_metering_1))
 epcframe <- transform(epcframe, Sub_metering_2 = as.numeric(Sub_metering_2))
 epcframe <- transform(epcframe, Sub_metering_3 = as.numeric(Sub_metering_3))
 
+par(mfrow=c(1, 1))
+
 # Show on screen for convenience
 with(epcframe,hist(Global_active_power, 
                    col = "red", 
